@@ -1,0 +1,27 @@
+{
+  "name": "top-binary_search_tree",
+  "version": "1.0.0",
+  "description": "The Odin Project's Binary Search Tree project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeaPotted/TOP-Binary_Search_Tree.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/TeaPotted/TOP-Binary_Search_Tree/issues"
+  },
+  "homepage": "https://github.com/TeaPotted/TOP-Binary_Search_Tree#readme",
+  "dependencies": {
+    "jest": "^30.4.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.7"
+  }
+}
