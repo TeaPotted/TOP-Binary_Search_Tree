@@ -4,13 +4,12 @@ class Tree {
   constructor(array) {
     // make sure that array has no duplicates and is sorted
     this.array = [...new Set(array)].sort((a, b) => a - b);
-    this.root = this.#buildTree(array, 0, array.length - 1);
+    this.root = this.#buildTree(this.array, 0, array.length - 1);
   }
 
   // buildTree(array) takes an array of numbers and turns it into a balanced binary tree full of Node objects appropriately placed
   // it should return the level-0 root node
   #buildTree(arr, start, end) {
-    // base case for
     if (start > end) return null;
 
     // find the middle of the array and make it the root of the tree
