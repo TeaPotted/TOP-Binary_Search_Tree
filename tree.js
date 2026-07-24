@@ -38,6 +38,11 @@ class Tree {
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
     this.#prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
+
+  // printTree() logs the binary search tree in a structured format
+  printTree() {
+    this.#prettyPrint(this.root)
+  }
 }
 
 export { Tree };
