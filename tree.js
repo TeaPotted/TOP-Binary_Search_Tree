@@ -43,6 +43,12 @@ class Tree {
   printTree() {
     this.#prettyPrint(this.root)
   }
+
+  // includes(value) returns true if the given value is in the tree. else, it should return false
+  includes(value) {
+    return this.array.includes(value);
+  }
+
 }
 
 export { Tree };
