@@ -24,6 +24,21 @@ class Tree {
 
     return root;
   }
+
+  // prettyPrint() will be used to visualize the binary search tree
+  #prettyPrint(node, prefix = "", isLeft = true) {
+    if (node === null || node === undefined) {
+      return;
+    }
+
+    this.#prettyPrint(
+      node.right,
+      `${prefix}${isLeft ? "│   " : "    "}`,
+      false,
+    );
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    this.#prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+  }
 }
 
 export { Tree };
