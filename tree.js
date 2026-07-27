@@ -46,7 +46,19 @@ class Tree {
 
   // includes(value) returns true if the given value is in the tree. else, it should return false
   includes(value) {
-    return this.array.includes(value);
+    let curr = this.root;
+
+    // move left if the value is smaller than the current node. if value is bigger than current node, move right.
+    while (curr !== null) {
+      if (value < curr.data && curr.left !== null) {
+        curr = curr.left;
+      } else if (value > curr.data && curr.right !== null) {
+        curr = curr.right;
+      } else break; // else, meaning value === curr.data or have reached end of tree
+    }
+
+    if (curr.data === value) return true;
+    return false;
   }
 
   // insert(value) that inserts a new node with that value into the tree.
