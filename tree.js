@@ -41,7 +41,7 @@ class Tree {
 
   // printTree() logs the binary search tree in a structured format
   printTree() {
-    this.#prettyPrint(this.root)
+    this.#prettyPrint(this.root);
   }
 
   // includes(value) returns true if the given value is in the tree. else, it should return false
@@ -49,6 +49,31 @@ class Tree {
     return this.array.includes(value);
   }
 
+  // insert(value) that inserts a new node with that value into the tree.
+  insert(value) {
+    // if value already exists, do nothing
+    if (this.includes(value)) return;
+
+    // if tree is empty, set root to a newly created Node using value
+    if (this.root === null) {
+      this.root = new Node(value);
+      return;
+    }
+
+    // find the node who is going to have the new node as it's child
+    let curr = this.root;
+    while (curr !== null) {
+      if (curr.data > value && curr.left !== null) {
+        curr = curr.left;
+      } else if (curr.data < value && curr.right !== null) {
+        curr = curr.right;
+      } else break;
+    }
+
+    // if key is smaller, make it left child. else, right child
+    if (value < curr) curr.left = new Node(value);
+    else curr.right = new Node(value);
+  }
 }
 
 export { Tree };
