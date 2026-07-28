@@ -82,8 +82,8 @@ class Tree {
       } else break;
     }
 
-    // if key is smaller, make it left child. else, right child
-    if (value < curr) curr.left = new Node(value);
+    // if value is smaller, make it left child. else, right child
+    if (value < curr.data) curr.left = new Node(value);
     else curr.right = new Node(value);
   }
 }
