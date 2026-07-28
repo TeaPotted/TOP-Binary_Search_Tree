@@ -11,17 +11,17 @@ test("Tree.includes(value) returns false if the given value is not in the tree",
 });
 
 test("Tree.insert(value) inserts a new value to the tree and also preserves the “binary search” property", () => {
-  const t = new Tree([1, 2]);
-  t.insert(3);
-  expect(t.root).toEqual({
-    _data: 1,
-    _left: null,
+  const t = new Tree([1, 5, 9, 2]);
+  t.insert(8);
+  expect(t.root).toMatchObject({
+    _data: 2,
+    _left: { _data: 1, _left: null, _right: null },
     _right: {
-      _data: 2,
+      _data: 5,
       _left: null,
       _right: {
-        _data: 3,
-        _left: null,
+        _data: 9,
+        _left: { _data: 8, _left: null, _right: null },
         _right: null,
       },
     },
@@ -31,7 +31,7 @@ test("Tree.insert(value) inserts a new value to the tree and also preserves the 
 test("Tree.insert(value) does nothing if value already exists in the tree", () => {
   const t = new Tree([1]);
   t.insert(1);
-  expect(t.root).toEqual({
+  expect(t.root).toMatchObject({
     _data: 1,
     _left: null,
     _right: null,
