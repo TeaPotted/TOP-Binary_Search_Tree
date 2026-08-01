@@ -93,6 +93,59 @@ class Tree {
     while (root !== null && root.left !== null) root = root.left;
     return root;
   }
+
+  // deleteItem(value) accepts a value and removes it from the tree
+  deleteItem(value, root = this.root) {
+    // if value is not in root, do nothing
+    if (!this.includes(value)) {
+      return;
+    }
+    // if the target node is the only node in the root, set the root to null
+    if (root.data === value && !root.left && !root.right) {
+      root = null;
+      return root;
+    }
+
+    let prevNode = root,
+      currNode = root;
+
+    // use a while loop to get the node containing value
+    while (currNode.data !== value) {
+      // if value < currNode.data, move down left by: setting prevNode = currNode and currNode = currNode.left
+      if (value < currNode.data) {
+        prevNode = currNode;
+        currNode = currNode.left;
+      } else if (value > currNode.data) {
+        // else if value > currNode.data, move down right by: setting prevNode = currNode and currNode = currNode.right
+        prevNode = currNode;
+        currNode = currNode.right;
+      }
+    }
+
+    // if the target node has two children, replace it with it's successor
+    if (currNode.right && currNode.left) {
+      currNode.data = this.#getSuccessor(currNode).data;
+      currNode.right = this.deleteItem(currNode.data, currNode.right);
+    }
+    // else if the target node has one child, replace the target node with it's child and remove it
+    else if (
+      (currNode.left && !currNode.right) ||
+      (currNode.right && !currNode.left)
+    ) {
+      const childNode = currNode.left ? currNode.left : currNode.right;
+      // remove the child from the currNode
+      currNode.left ? (currNode.left = null) : (currNode.right = null);
+      // set the target node's data to it's child's data
+      currNode.data = childNode.data;
+      currNode.left = childNode.left;
+      currNode.right = childNode.right;
+    }
+    // else target node has no children (leaf node), remove it by setting prevNode's .left / .right to null
+    else {
+      prevNode.left ? (prevNode.left = null) : (prevNode.right = null);
+    }
+    return root;
+  }
 }
 
 export { Tree };

@@ -37,3 +37,65 @@ test("Tree.insert(value) does nothing if value already exists in the tree", () =
     _right: null,
   });
 });
+
+test("Tree.deleteItem(value) removes a node with no children,", () => {
+  const t = new Tree([1, 9, 5, 2]);
+  t.deleteItem(1);
+  expect(t.root).toMatchObject({
+    _data: 2,
+    _left: null,
+    _right: {
+      _data: 5,
+      _left: null,
+      _right: { _data: 9, _left: null, _right: null },
+    },
+  });
+});
+
+test("Tree.deleteItem(value) removes a node with one child by replacing itself with it's child", () => {
+  const t = new Tree([1, 9, 5, 2]);
+  t.deleteItem(5);
+  expect(t.root).toMatchObject({
+    _data: 2,
+    _left: { _data: 1, _left: null, _right: null },
+    _right: { _data: 9, _left: null, _right: null },
+  });
+
+  const t2 = new Tree([1, 9, 5, 2]);
+  t2.insert(0);
+  t2.deleteItem(1);
+  expect(t2.root).toMatchObject({
+    _data: 2,
+    _left: { _data: 0, _left: null, _right: null },
+    _right: {
+      _data: 5,
+      _left: null,
+      _right: { _data: 9, _left: null, _right: null },
+    },
+  });
+});
+
+test("Tree.deleteItem(value) removes a node with two children by replacing itself with it's inorder successor", () => {
+  const t = new Tree([1, 9, 5, 2]);
+  t.deleteItem(2);
+  expect(t.root).toMatchObject({
+    _data: 5,
+    _left: { _data: 1, _left: null, _right: null },
+    _right: { _data: 9, _left: null, _right: null },
+  });
+});
+
+test("Tree.deleteItem(value) does nothing if the given value doesn't exist in tree", () => {
+  const t = new Tree([1, 9, 5, 2]);
+
+  t.deleteItem(8);
+  expect(t.root).toMatchObject({
+    _data: 2,
+    _left: { _data: 1, _left: null, _right: null },
+    _right: {
+      _data: 5,
+      _left: null,
+      _right: { _data: 9, _left: null, _right: null },
+    },
+  });
+});
