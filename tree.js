@@ -86,6 +86,13 @@ class Tree {
     if (value < curr.data) curr.left = new Node(value);
     else curr.right = new Node(value);
   }
+
+  // getSuccessor(root) gets the smallest node in the root's right subtree
+  #getSuccessor(root) {
+    root = root.right;
+    while (root !== null && root.left !== null) root = root.left;
+    return root;
+  }
 }
 
 export { Tree };
