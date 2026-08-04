@@ -100,6 +100,13 @@ class Tree {
     if (!this.includes(value)) {
       return;
     }
+
+    // if the target node is the only node in the tree, set the tree to null
+    if (this.root.data === value && !this.root.left && !this.root.right) {
+      this.root = null
+      return this.root;
+    }
+    
     // if the target node is the only node in the root, set the root to null
     if (root.data === value && !root.left && !root.right) {
       root = null;
