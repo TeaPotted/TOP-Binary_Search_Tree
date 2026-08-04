@@ -103,10 +103,10 @@ class Tree {
 
     // if the target node is the only node in the tree, set the tree to null
     if (this.root.data === value && !this.root.left && !this.root.right) {
-      this.root = null
+      this.root = null;
       return this.root;
     }
-    
+
     // if the target node is the only node in the root, set the root to null
     if (root.data === value && !root.left && !root.right) {
       root = null;
@@ -152,6 +152,31 @@ class Tree {
       prevNode.left ? (prevNode.left = null) : (prevNode.right = null);
     }
     return root;
+  }
+
+  // levelOrderForEach(callback) traverses the tree in breadth-first level order and calls the callback on each value
+  levelOrderForEach(callback) {
+    // if no callback function is provided, throw an error reporting that a callback is required
+    if (typeof callback !== "function") {
+      throw new Error("Callback is required!");
+    }
+    // if root is null, do nothing
+    if (this.root === null) return;
+
+    // create a queue using the root of the tree
+    let queue = [this.root];
+    // while there is at least one discovered node:
+    while (queue.length !== 0) {
+      // remove the first node from queue
+      const current = queue.shift();
+      callback(current);
+
+      // if current.left is not null, push current.left to the queue
+      if (current.left !== null) queue.push(current.left);
+
+      // if current.right is not null, push current.right to the queue
+      if (current.right !== null) queue.push(current.right);
+    }
   }
 }
 

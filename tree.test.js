@@ -99,3 +99,21 @@ test("Tree.deleteItem(value) does nothing if the given value doesn't exist in tr
     },
   });
 });
+
+test("Tree.levelOrderForEach(callback) traverses the tree in breadth-first level order and calls the callback on each value as it traverses", () => {
+  const mockCallback = jest.fn((n) => n.data);
+  const t = new Tree([1, 2, 3]);
+  t.insert(4);
+  t.levelOrderForEach(mockCallback);
+
+  expect(mockCallback.mock.calls).toHaveLength(4);
+  expect(mockCallback.mock.results[0].value).toBe(2);
+  expect(mockCallback.mock.results[1].value).toBe(1);
+  expect(mockCallback.mock.results[2].value).toBe(3);
+  expect(mockCallback.mock.results[3].value).toBe(4);
+});
+
+test("Tree.levelOrderForEach(callback) throws an Error if function is called without a callback", () => {
+  const t = new Tree([1, 2, 3]);
+  expect(t.levelOrderForEach).toThrow(new Error("Callback is required!"));
+});
