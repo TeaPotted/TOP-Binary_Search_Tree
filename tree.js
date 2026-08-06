@@ -178,6 +178,20 @@ class Tree {
       if (current.right !== null) queue.push(current.right);
     }
   }
+
+  // preOrderForEach(callback) traverses through the tree using pre-order traversal and calls the callback on each value
+  preOrderForEach(callback, root = this.root) {
+    // if function is called without a callback, throw an error
+    if (typeof callback !== "function") {
+      throw new Error("Callback is required!");
+    }
+
+    // if the given root is empty, return
+    if (root === null) return;
+    callback(root);
+    this.preOrderForEach(callback, root.left);
+    this.preOrderForEach(callback, root.right);
+  }
 }
 
 export { Tree };
