@@ -154,12 +154,19 @@ class Tree {
     return root;
   }
 
-  // levelOrderForEach(callback) traverses the tree in breadth-first level order and calls the callback on each value
-  levelOrderForEach(callback) {
-    // if no callback function is provided, throw an error reporting that a callback is required
+  // function that checks if the given callback is a function
+  #checkCallback(callback) {
+    // throw an error if the callback is not a function
     if (typeof callback !== "function") {
       throw new Error("Callback is required!");
     }
+  }
+
+  // levelOrderForEach(callback) traverses the tree in breadth-first level order and calls the callback on each value
+  levelOrderForEach(callback) {
+    // if no callback function is provided, throw an error reporting that a callback is required
+    this.#checkCallback(callback);
+
     // if root is null, do nothing
     if (this.root === null) return;
 
@@ -182,9 +189,7 @@ class Tree {
   // preOrderForEach(callback) traverses through the tree using pre-order traversal and calls the callback on each value
   preOrderForEach(callback, root = this.root) {
     // if function is called without a callback, throw an error
-    if (typeof callback !== "function") {
-      throw new Error("Callback is required!");
-    }
+    this.#checkCallback(callback);
 
     // if the given root is empty, return
     if (root === null) return;
@@ -195,9 +200,7 @@ class Tree {
 
   // inOrderForEach traverses through the tree using inorder traversal and calls the callback on each value
   inOrderForEach(callback, root = this.root) {
-    if (typeof callback !== "function") {
-      throw new Error("Callback is required!");
-    }
+    this.#checkCallback(callback);
 
     if (root === null) return;
     this.inOrderForEach(callback, root.left);
