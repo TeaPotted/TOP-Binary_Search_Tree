@@ -115,7 +115,9 @@ test("Tree.levelOrderForEach(callback) traverses the tree in breadth-first level
 
 test("Tree.levelOrderForEach(callback) throws an Error if function is called without a callback", () => {
   const t = new Tree([1, 2, 3]);
-  expect(t.levelOrderForEach).toThrow(new Error("Callback is required!"));
+  expect(() => t.levelOrderForEach()).toThrow(
+    new Error("Callback is required!"),
+  );
 });
 
 test("Tree.preOrderForEach(callback) traverses the tree using pre-order traversal and calls the callback on each value as it traverses", () => {
