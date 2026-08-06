@@ -132,7 +132,22 @@ test("Tree.preOrderForEach(callback) traverses the tree using pre-order traversa
 
 test("Tree.preOrderForEach(callback) throws an error if function is called without a callback", () => {
   const t = new Tree([1, 2, 3]);
-  expect(() => t.preOrderForEach()).toThrow(
-    new Error("Callback is required!"),
-  );
+  expect(() => t.preOrderForEach()).toThrow(new Error("Callback is required!"));
+});
+
+test("Tree.inOrderForEach(callback) traverses the tree using in-order traversal and calls the callback on each value as it traverses", () => {
+  const mockCallback = jest.fn((n) => n.data);
+  const t = new Tree([1, 0, 3, 2, 6]);
+
+  t.inOrderForEach(mockCallback);
+  expect(mockCallback.mock.results[0].value).toBe(0);
+  expect(mockCallback.mock.results[1].value).toBe(1);
+  expect(mockCallback.mock.results[2].value).toBe(2);
+  expect(mockCallback.mock.results[3].value).toBe(3);
+  expect(mockCallback.mock.results[4].value).toBe(6);
+});
+
+test("Tree.inOrderForEach(callback) throws an error if function is called without a callback", () => {
+  const t = new Tree([1, 2, 3]);
+  expect(() => t.inOrderForEach()).toThrow(new Error("Callback is required!"));
 });

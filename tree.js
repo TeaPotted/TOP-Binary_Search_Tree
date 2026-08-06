@@ -192,6 +192,18 @@ class Tree {
     this.preOrderForEach(callback, root.left);
     this.preOrderForEach(callback, root.right);
   }
+
+  // inOrderForEach traverses through the tree using inorder traversal and calls the callback on each value
+  inOrderForEach(callback, root = this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("Callback is required!");
+    }
+
+    if (root === null) return;
+    this.inOrderForEach(callback, root.left);
+    callback(root);
+    this.inOrderForEach(callback, root.right);
+  }
 }
 
 export { Tree };
