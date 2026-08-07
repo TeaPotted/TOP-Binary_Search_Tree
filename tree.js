@@ -234,6 +234,16 @@ class Tree {
     }
     return curr;
   }
+
+  // returns the height of the given node
+  #calculateNodeHeight(node) {
+    if (node === null) return -1;
+
+    const leftHeight = this.#calculateNodeHeight(node.left);
+    const rightHeight = this.#calculateNodeHeight(node.right);
+    // return (the maximum of the leftHeight and rightHeight) + 1
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 }
 
 export { Tree };
