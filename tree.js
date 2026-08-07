@@ -254,6 +254,26 @@ class Tree {
     const targetNode = this.#getNode(value);
     return this.#calculateNodeHeight(targetNode);
   }
+
+  // depth(value) returns the depth of the node containing the given value
+  depth(value) {
+    if (!this.includes(value)) return undefined;
+
+    let curr = this.root;
+    let count = 0;
+
+    while (curr.data !== value) {
+      if (value < curr.data && curr.left) {
+        curr = curr.left;
+        count++;
+      } else if (value > curr.data && curr.right) {
+        curr = curr.right;
+        count++;
+      }
+    }
+
+    return count;
+  }
 }
 
 export { Tree };

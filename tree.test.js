@@ -175,12 +175,24 @@ test("Tree.postOrderForEach(callback) throws an error if function is called with
 
 test("Tree.height(value) returns the height of the node containing value", () => {
   const t = new Tree([1, 0, 3, 2, 6]);
-  expect(t.height(2)).toBe(2)
+  expect(t.height(2)).toBe(2);
   expect(t.height(0)).toBe(1);
   expect(t.height(6)).toBe(0);
-})
+});
 
 test("Tree.height(value) returns undefined if the value is not found in the tree", () => {
   const t = new Tree([1, 2, 3]);
   expect(t.height(4)).toBe(undefined);
-})
+});
+
+test("Tree.depth(value) returns the depth of the node containing the given value", () => {
+  const t = new Tree([1, 0, 3, 2, 6]);
+  expect(t.depth(2)).toBe(0);
+  expect(t.depth(0)).toBe(1);
+  expect(t.depth(6)).toBe(2);
+});
+
+test("Tree.depth(value) returns undefined if the value is not found in the tree", () => {
+  const t = new Tree([1, 2, 3]);
+  expect(t.depth(4)).toBe(undefined);
+});
