@@ -47,6 +47,8 @@ class Tree {
   // includes(value) returns true if the given value is in the tree. else, it should return false
   includes(value) {
     let curr = this.root;
+    // if root is empty return false
+    if (!curr) return false;
 
     // move left if the value is smaller than the current node. if value is bigger than current node, move right.
     while (curr !== null) {
