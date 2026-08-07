@@ -217,6 +217,23 @@ class Tree {
     this.postOrderForEach(callback, root.right);
     callback(root);
   }
+
+  #getNode(value) {
+    // if value is not found in tree, do nothing
+    if (!this.includes(value)) return;
+
+    let curr = this.root;
+    // move left if the value is smaller than the current node
+    // move right if value is bigger than current node
+    while (curr !== null) {
+      if (value < curr.data && curr.left !== null) {
+        curr = curr.left;
+      } else if (value > curr.data && curr.right !== null) {
+        curr = curr.right;
+      } else break; // else, meaning value === curr.data or have reached end of tree
+    }
+    return curr;
+  }
 }
 
 export { Tree };
