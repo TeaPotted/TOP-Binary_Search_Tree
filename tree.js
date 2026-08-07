@@ -244,6 +244,14 @@ class Tree {
     // return (the maximum of the leftHeight and rightHeight) + 1
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  // height(value) return the height of the node containing the given value
+  height(value) {
+    if (!this.includes(value)) return undefined;
+
+    const targetNode = this.#getNode(value);
+    return this.#calculateNodeHeight(targetNode);
+  }
 }
 
 export { Tree };
