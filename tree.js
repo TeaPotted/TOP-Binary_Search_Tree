@@ -293,6 +293,11 @@ class Tree {
 
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  // isBalanced() returns true is the tree is balanced, else false
+  isBalanced() {
+    return this.#checkIfBalance(this.root) > -1;
+  }
 }
 
 export { Tree };

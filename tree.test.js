@@ -196,3 +196,20 @@ test("Tree.depth(value) returns undefined if the value is not found in the tree"
   const t = new Tree([1, 2, 3]);
   expect(t.depth(4)).toBe(undefined);
 });
+
+test("Tree.isBalanced() returns true if tree is height-balanced", () => {
+  const t = new Tree([1, 0, 3, 2, 6]);
+  expect(t.isBalanced()).toBe(true);
+
+  const t2 = new Tree([]);
+  expect(t2.isBalanced()).toBe(true);
+});
+
+test("Tree.isBalanced() returns false if tree is not height-balanced", () => {
+  const t = new Tree([1, 0, 3, 2, 6]);
+  t.insert(55);
+  t.insert(50);
+  t.insert(89);
+  t.insert(90);
+  expect(t.isBalanced()).toBe(false);
+});
