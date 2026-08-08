@@ -274,6 +274,25 @@ class Tree {
 
     return count;
   }
+
+  // returns the given root's height if the given root is balanced, else returns -1
+  #checkIfBalance(root) {
+    if (root === null) return 0;
+
+    const leftHeight = this.#checkIfBalance(root.left);
+    const rightHeight = this.#checkIfBalance(root.right);
+
+    // if the subtrees are unbalanced or
+    // the absolute difference of their heights is greater than -1, return -1
+    if (
+      leftHeight === -1 ||
+      rightHeight === -1 ||
+      Math.abs(leftHeight - rightHeight) > 1
+    )
+      return -1;
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 }
 
 export { Tree };
