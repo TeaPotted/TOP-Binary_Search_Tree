@@ -213,3 +213,41 @@ test("Tree.isBalanced() returns false if tree is not height-balanced", () => {
   t.insert(90);
   expect(t.isBalanced()).toBe(false);
 });
+
+test("Tree.rebalance() rebalances the tree if it is unbalanced", () => {
+  const t = new Tree([15, 25, 50]);
+  t.insert(34);
+  t.insert(12);
+  t.insert(4);
+  t.insert(99);
+  t.rebalance();
+  expect(t.root).toMatchObject({
+    _data: 25,
+    _left: {
+      _data: 12,
+      _left: { _data: 4, _left: null, _right: null },
+      _right: { _data: 15, _left: null, _right: null },
+    },
+    _right: {
+      _data: 50,
+      _left: { _data: 34, _left: null, _right: null },
+      _right: { _data: 99, _left: null, _right: null },
+    },
+  });
+});
+
+test("Tree.rebalance() does nothing if the tree is already balanced", () => {
+  const t = new Tree([15, 25, 50]);
+  t.insert(34);
+  t.rebalance();
+
+  expect(t.root).toMatchObject({
+    _data: 25,
+    _left: { _data: 15, _left: null, _right: null },
+    _right: {
+      _data: 50,
+      _left: { _data: 34, _left: null, _right: null },
+      _right: null,
+    },
+  });
+});

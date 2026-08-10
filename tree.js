@@ -298,6 +298,19 @@ class Tree {
   isBalanced() {
     return this.#checkIfBalance(this.root) > -1;
   }
+
+  // rebalance() rebalances the tree if it is unbalanced
+  rebalance() {
+    // if tree is already balanced, do nothing
+    if (this.isBalanced()) return;
+
+    let nodes = [];
+    // get each node in the tree and push it's data to the nodes array
+    this.inOrderForEach((node) => nodes.push(node.data));
+
+    // create a new Tree using nodes and set the current root the new Tree's root
+    this.root = new Tree(nodes).root;
+  }
 }
 
 export { Tree };
